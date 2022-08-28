@@ -10,34 +10,30 @@ const lists = [
 ]
 
 function diffArray(arr1, arr2) {
-  const newArr = [];
-  const forFixArr = [[...arr1], [...arr2]];
-  let fixedArr = forFixArr.sort(function(a,b){return a.length - b.length});
-
-  console.log(fixedArr);
- 
-  let test = [...fixedArr[0]];
-  let target = [...fixedArr[1]];
-
   
+  const newArr = [];
+  const testArr = [];
 
-  for (let i = 0; i < test.length; i++) {
-    console.log(test.indexOf(target[i]) )
-    if (test.indexOf(target[i]) < 0) {
-      newArr.push(target[i])
-    } 
+  const singleArr = arr1.concat(arr2).sort(function(a,b){return a-b});
+  const fixedSingleArr = [...new Set(singleArr)]
+
+  console.log('Array concatenado ' + singleArr);
+  console.log('Array sin repeticiones '+ fixedSingleArr)
+  for ( let i = 0; i < singleArr.length; i++) {
+    if (singleArr[i+1] == singleArr[i]) {
+      testArr.push(singleArr[i])
+    }
   }
 
- /* for (let i = 0; i < target.length; i++) {
-    if (target.indexOf(test[i]) < 0) {
-      newArr.push(test[i])
+  for ( let i = 0; i < fixedSingleArr.length; i++) {
+    if(testArr.indexOf(fixedSingleArr[i]) < 0) {
+      newArr.push(fixedSingleArr[i])
     }
-  }*/
+  }
   console.log('--- test ---')
-  console.log(newArr)
-
-
+  console.log('test arr '+testArr)
+  console.log('newArr ' + newArr)
   return newArr;
-}
+ }
 
-diffArray([1, "calf", 3, "piglet"], [7, "filly"]);
+diffArray(["diorite", "andesite", "grass", "dirt", "pink wool", "dead shrub"], ["diorite", "andesite", "grass", "dirt", "dead shrub"]);
