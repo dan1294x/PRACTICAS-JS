@@ -35,8 +35,7 @@ function diffArray(arr1, arr2) {
   }*/
   console.log('--- test ---')
   console.log(newArr)
-  console.log('---- new version (testing) ----')
-  console.log()
+
 
   return newArr;
 }
