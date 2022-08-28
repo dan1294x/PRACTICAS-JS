@@ -1,0 +1,44 @@
+const lists = [
+  [[1, 2, 3, 5], [1, 2, 3, 4, 5]], // ok
+  [["diorite", "andesite", "grass", "dirt", "pink wool", "dead shrub"], ["diorite", "andesite", "grass", "dirt", "dead shrub"]], // ok
+  [["andesite", "grass", "dirt", "pink wool", "dead shrub"], ["diorite", "andesite", "grass", "dirt", "dead shrub"]], // nono
+  [["andesite", "grass", "dirt", "dead shrub"], ["andesite", "grass", "dirt", "dead shrub"]], // ok
+  [[1, "calf", 3, "piglet"], [1, "calf", 3, 4]], // nono
+  [[], ["snuffleupagus", "cookie monster", "elmo"]], // nono
+  [[1, "calf", 3, "piglet"], [7, "filly"]], // nono
+
+]
+
+function diffArray(arr1, arr2) {
+  const newArr = [];
+  const forFixArr = [[...arr1], [...arr2]];
+  let fixedArr = forFixArr.sort(function(a,b){return a.length - b.length});
+
+  console.log(fixedArr);
+ 
+  let test = [...fixedArr[0]];
+  let target = [...fixedArr[1]];
+
+  
+
+  for (let i = 0; i < test.length; i++) {
+    console.log(test.indexOf(target[i]) )
+    if (test.indexOf(target[i]) < 0) {
+      newArr.push(target[i])
+    } 
+  }
+
+ /* for (let i = 0; i < target.length; i++) {
+    if (target.indexOf(test[i]) < 0) {
+      newArr.push(test[i])
+    }
+  }*/
+  console.log('--- test ---')
+  console.log(newArr)
+  console.log('---- new version (testing) ----')
+  console.log()
+
+  return newArr;
+}
+
+diffArray([1, "calf", 3, "piglet"], [7, "filly"]);
