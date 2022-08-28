@@ -1,39 +1,19 @@
-const lists = [
-  [[1, 2, 3, 5], [1, 2, 3, 4, 5]], // ok
-  [["diorite", "andesite", "grass", "dirt", "pink wool", "dead shrub"], ["diorite", "andesite", "grass", "dirt", "dead shrub"]], // ok
-  [["andesite", "grass", "dirt", "pink wool", "dead shrub"], ["diorite", "andesite", "grass", "dirt", "dead shrub"]], // nono
-  [["andesite", "grass", "dirt", "dead shrub"], ["andesite", "grass", "dirt", "dead shrub"]], // ok
-  [[1, "calf", 3, "piglet"], [1, "calf", 3, 4]], // nono
-  [[], ["snuffleupagus", "cookie monster", "elmo"]], // nono
-  [[1, "calf", 3, "piglet"], [7, "filly"]], // nono
-
-]
-
 function diffArray(arr1, arr2) {
   
   const newArr = [];
-  const testArr = [];
 
-  const singleArr = arr1.concat(arr2).sort(function(a,b){return a-b});
-  const fixedSingleArr = [...new Set(singleArr)]
+  const singleArr = [...new Set(arr1.concat(arr2))];
+  console.log('Array concatenado y single ' + singleArr); // solo para ver como quedó de lindo el array sin repeticiones y concatenado
 
-  console.log('Array concatenado ' + singleArr);
-  console.log('Array sin repeticiones '+ fixedSingleArr)
-  for ( let i = 0; i < singleArr.length; i++) {
-    if (singleArr[i+1] == singleArr[i]) {
-      testArr.push(singleArr[i])
-    }
-  }
+  newArr.push(...singleArr.filter(function(elem) { 
+    return !arr2.includes(elem) || !arr1.includes(elem)  // filtra los elementos que no se incluyen en el array uno O que no se incluyen en el array 2.
+  }))
 
-  for ( let i = 0; i < fixedSingleArr.length; i++) {
-    if(testArr.indexOf(fixedSingleArr[i]) < 0) {
-      newArr.push(fixedSingleArr[i])
-    }
-  }
   console.log('--- test ---')
-  console.log('test arr '+testArr)
-  console.log('newArr ' + newArr)
+  console.log('newArr ' + newArr) // output en consola para testear el resultado.
   return newArr;
  }
 
-diffArray(["diorite", "andesite", "grass", "dirt", "pink wool", "dead shrub"], ["diorite", "andesite", "grass", "dirt", "dead shrub"]);
+diffArray(["andesite", "grass", "dirt", "pink wool", "dead shrub"], ["diorite", "andesite", "grass", "dirt", "dead shrub"]);
+
+// diffArray(["diorite", "andesite", "grass", "dirt", "pink wool", "dead shrub"], ["diorite", "andesite", "grass", "dirt", "dead shrub"]);
